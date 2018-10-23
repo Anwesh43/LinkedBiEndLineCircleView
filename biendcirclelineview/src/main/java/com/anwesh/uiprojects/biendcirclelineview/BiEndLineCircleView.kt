@@ -4,6 +4,7 @@ package com.anwesh.uiprojects.biendcirclelineview
  * Created by anweshmishra on 23/10/18.
  */
 
+import android.app.Activity
 import android.view.View
 import android.view.MotionEvent
 import android.content.Context
@@ -195,6 +196,14 @@ class BiEndLineCircleView (ctx : Context) : View(ctx) {
             becl.startUpdating {
                 animator.start()
             }
+        }
+    }
+
+    companion object {
+        fun create(activity : Activity) : BiEndLineCircleView {
+            val view : BiEndLineCircleView = BiEndLineCircleView(activity)
+            activity.setContentView(view)
+            return view
         }
     }
 }
