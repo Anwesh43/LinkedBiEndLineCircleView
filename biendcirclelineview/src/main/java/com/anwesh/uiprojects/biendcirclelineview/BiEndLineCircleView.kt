@@ -8,10 +8,36 @@ import android.view.View
 import android.view.MotionEvent
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
 
 val nodes : Int = 5
+
+fun Canvas.drawBELCNode(i : Int, scale : Float, paint : Paint) {
+    val w : Float = width.toFloat()
+    val h : Float = height.toFloat()
+    val gap : Float = w / (nodes + 1)
+    val r : Float = gap / 3
+    paint.style = Paint.Style.STROKE
+    paint.strokeWidth = Math.min(w, h) / 60
+    paint.strokeCap = Paint.Cap.ROUND
+    paint.color = Color.parseColor("#43A047")
+    save()
+    translate(gap * i + gap, h/2)
+    for (j in 0..1) {
+        val sc : Float = Math.min(0.5f, Math.max(0f, scale - 0.5f * j)) * 2
+        save()
+        scale(1f, 1f - 2 * j)
+        drawLine(0f, 0f, 0f, gap, paint)
+        save()
+        translate(0f, gap + r)
+        drawArc(RectF(-r, -r, r, r), -90f - 180f * sc, 360f * sc, false, paint)
+        restore()
+        restore()
+    }
+    restore()
+}
 
 class BiEndLineCircleView (ctx : Context) : View(ctx) {
 
