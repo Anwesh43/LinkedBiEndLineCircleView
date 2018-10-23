@@ -172,4 +172,27 @@ class BiEndLineCircleView (ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : BiEndLineCircleView) {
+
+        private val becl : BELCNode = BELCNode(0)
+
+        private val animator : Animator = Animator(view)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(Color.parseColor("#BDBDBD"))
+            becl.draw(canvas, paint)
+            animator.animate {
+                becl.update {i, scl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            becl.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
