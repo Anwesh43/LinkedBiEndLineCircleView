@@ -178,7 +178,7 @@ class BiEndLineCircleView (ctx : Context) : View(ctx) {
 
     data class Renderer(var view : BiEndLineCircleView) {
 
-        private val becl : BELCNode = BELCNode(0)
+        private val becl : BiEndLineCircle = BiEndLineCircle(0)
 
         private val animator : Animator = Animator(view)
 
